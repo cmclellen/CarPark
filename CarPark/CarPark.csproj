@@ -53,6 +53,7 @@
     <Compile Include="RateCalculators\StandardRateCalculator.cs" />
     <Compile Include="RateCalculators\NightRateCalculator.cs" />
     <Compile Include="RateCalculators\WeekendRateCalculator.cs" />
+    <Compile Include="UICoordinator.cs" />
     <Compile Include="Utilities\Guard.cs" />
   </ItemGroup>
   <ItemGroup>

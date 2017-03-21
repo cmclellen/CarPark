@@ -9,19 +9,24 @@ namespace CarPark.Utilities
         {
             if (obj == null)
             {
-                var memberExpression = (MemberExpression)expr.Body;
-                var memberName = memberExpression.Member.Name;
-                throw new ArgumentNullException(memberName, "Cannot be null.");
+                throw new ArgumentNullException(GetMemberName(expr), "Cannot be null.");
             }
         }
 
-        public static void NotNullOrEmpty(string text)
+        private static string GetMemberName<T>(Expression<Func<T>> expr)
         {
-            //NotNull();
-            //if (string.IsNullOrEmpty(text))
-            //{
-            //    throw new 
-            //}
+            var memberExpression = (MemberExpression)expr.Body;
+            var memberName = memberExpression.Member.Name;
+            return memberName;
+        }
+
+        public static void NotNullOrEmpty(Expression<Func<string>> expr, string text)
+        {
+            NotNull<string>(expr, text);
+            if (string.IsNullOrEmpty(text))
+            {
+                throw new ArgumentException("Cannot be an empty string.", GetMemberName(expr));
+            }
         }
     }
 }

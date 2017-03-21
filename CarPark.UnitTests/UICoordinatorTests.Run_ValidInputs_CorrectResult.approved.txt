@@ -1,0 +1,38 @@
+﻿All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Early Bird
+Price: $13.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Early Bird
+Price: $13.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Weekend Rate
+Price: $10.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Standard Rate
+Price: $5.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Standard Rate
+Price: $10.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Standard Rate
+Price: $15.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Standard Rate
+Price: $20.00
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: 

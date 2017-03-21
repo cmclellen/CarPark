@@ -6,7 +6,7 @@ namespace CarPark.RateCalculators
     {
         public CalculateResponse(string rateName, decimal price)
         {
-            Guard.NotNullOrEmpty(rateName);
+            Guard.NotNullOrEmpty(() => rateName, rateName);
             this.RateName = rateName;
             this.Price = price;
         }

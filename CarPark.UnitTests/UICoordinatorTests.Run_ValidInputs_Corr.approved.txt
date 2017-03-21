@@ -1,0 +1,8 @@
+﻿All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: Time exited: Rate Name: Night Rate
+Price: $6.50
+
+All times must be in the format dd/MM/yyyy HH:mm
+Type exit to end the program
+Time entered: 
