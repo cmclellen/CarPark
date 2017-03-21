@@ -9,10 +9,7 @@ namespace CarPark.RateCalculators
         {
         }
 
-        public override string Name
-        {
-            get { return "Early Bird"; }
-        }
+        public override string RateName { get; } = "Early Bird";
 
         public override CalculateResponse Calculate(CalculateRequest request)
         {
@@ -25,7 +22,7 @@ namespace CarPark.RateCalculators
                 && (15.5 <= endHour && endHour < 23.5);
             if (isEligible)
             {
-                return new CalculateResponse(Name, 13M);
+                return new CalculateResponse(RateName, 13M);
             }
             return base.Calculate(request);
         }

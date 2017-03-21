@@ -21,10 +21,10 @@ namespace CarPark.UnitTests.RateCalculators
         private EarlyBirdRateCalculator SUT { get; set; }
 
         [Test]
-        public void Name_ValidEarlyBirdRateCalculator_NamedCorrectly()
+        public void Name_ValidEarlyBirdRateCalculator_CorrectRateName()
         {
             // ASSERT
-            Assert.AreEqual("Early Bird", SUT.Name);
+            Assert.AreEqual("Early Bird", SUT.RateName);
         }
 
         [Test]

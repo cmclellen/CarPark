@@ -21,10 +21,10 @@ namespace CarPark.UnitTests.RateCalculators
         private NightRateCalculator SUT { get; set; }
 
         [Test]
-        public void Name_ValidNightRateCalculator_NamedCorrectly()
+        public void Name_ValidNightRateCalculator_CorrectRateName()
         {
             // ASSERT
-            Assert.AreEqual("Night Rate", SUT.Name);
+            Assert.AreEqual("Night Rate", SUT.RateName);
         }
 
         [Test]

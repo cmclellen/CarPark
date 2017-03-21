@@ -2,7 +2,7 @@
 {
     public interface IRateCalculator
     {
-        string Name { get; }
+        string RateName { get; }
         CalculateResponse Calculate(CalculateRequest request);
     }
 }

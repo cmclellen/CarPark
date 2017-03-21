@@ -57,6 +57,7 @@
     <Compile Include="RateCalculators\EarlyBirdRateCalculatorTests.cs" />
     <Compile Include="RateCalculators\NightRateCalculatorTests.cs" />
     <Compile Include="RateCalculators\StandardRateCalculatorTests.cs" />
+    <Compile Include="RateCalculators\WeekendRateCalculatorTests.cs" />
     <Compile Include="Utilities\GuardTests.cs" />
   </ItemGroup>
   <ItemGroup>

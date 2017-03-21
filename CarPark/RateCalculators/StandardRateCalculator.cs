@@ -4,11 +4,8 @@ using System;
 namespace CarPark.RateCalculators
 {
     public class StandardRateCalculator : IRateCalculator
-    {   
-        public string Name
-        {
-            get { return "Standard Rate"; }
-        }
+    {
+        public string RateName { get; } = "Standard Rate";
 
         public CalculateResponse Calculate(CalculateRequest request)
         {
@@ -32,7 +29,7 @@ namespace CarPark.RateCalculators
             {
                 price = 20M * ((request.EndDateTime.Date - request.StartDateTime.Date).Days + 1);
             }
-            return new CalculateResponse(Name, price);
+            return new CalculateResponse(RateName, price);
         } 
     }
 }

@@ -18,15 +18,15 @@ namespace CarPark.UnitTests.RateCalculators
         private StandardRateCalculator SUT { get; set; }
 
         [Test]
-        public void Name_ValidStandardRateCalculator_NamedCorrectly()
+        public void Name_ValidStandardRateCalculator_CorrectRateName()
         {
             // ACT
             SUT.Calculate(new CalculateRequest(StartDate, StartDate));
 
             // ASSERT
-            Assert.AreEqual("Standard Rate", SUT.Name);
+            Assert.AreEqual("Standard Rate", SUT.RateName);
         }
-
+        
         [Test]
         public void Calculate_FirstHour_CorrectRate()
         {
@@ -34,11 +34,12 @@ namespace CarPark.UnitTests.RateCalculators
             var endDates = new[] { 0.0, .5, .9 }.Select(i => StartDate.AddHours(i));
 
             // ACT
-            var actual = endDates.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
+            var responses = endDates.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 5M;
-            Assert.IsTrue(actual.All(i => i.Price == expected));
+            Assert.IsTrue(responses.All(i => i.Price == expected));
+            Assert.IsTrue(responses.All(i => string.Equals(i.RateName, "Standard Rate")));
         }
         
         [Test]
@@ -48,11 +49,11 @@ namespace CarPark.UnitTests.RateCalculators
             var endDateTimes = new[] { 1.0, 1.5, 1.9 }.Select(i=> StartDate.AddHours(i));
 
             // ACT
-            var actual = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
+            var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 10M;
-            Assert.IsTrue(actual.All(i => i.Price == expected));
+            Assert.IsTrue(responses.All(i => i.Price == expected));
         }
 
         [Test]
@@ -62,11 +63,11 @@ namespace CarPark.UnitTests.RateCalculators
             var endDateTimes = new[] { 2.0, 2.5, 2.9 }.Select(i => StartDate.AddHours(i));
 
             // ACT
-            var actual = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
+            var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 15M;
-            Assert.IsTrue(actual.All(i => i.Price == expected));
+            Assert.IsTrue(responses.All(i => i.Price == expected));
         }
 
         [Test]

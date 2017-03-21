@@ -7,7 +7,7 @@
             Successor = successor;
         }
 
-        public abstract string Name { get; }
+        public abstract string RateName { get; }
 
         private IRateCalculator Successor { get; set; }
 

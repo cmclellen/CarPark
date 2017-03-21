@@ -9,10 +9,7 @@ namespace CarPark.RateCalculators
         {
         }
 
-        public override string Name
-        {
-            get { return "Night Rate"; }
-        }
+        public override string RateName { get; } = "Night Rate";
 
         public override CalculateResponse Calculate(CalculateRequest request)
         {
@@ -35,7 +32,7 @@ namespace CarPark.RateCalculators
                 && (endHour < exclMaxEndHour);
             if (isEligible)
             {
-                return new CalculateResponse(Name, 6.5M);
+                return new CalculateResponse(RateName, 6.5M);
             }
             return base.Calculate(request);
         }
