@@ -1,17 +1,43 @@
-﻿using System;
+﻿using CarPark.Utilities;
 
 namespace CarPark.RateCalculators
 {
-    public class NightRateCalculator : IRateCalculator
+    public class NightRateCalculator : BaseRateCalculator, IRateCalculator
     {
-        public string Name
+        public NightRateCalculator(IRateCalculator successor)
+            : base(successor)
+        {
+        }
+
+        public override string Name
         {
             get { return "Night Rate"; }
         }
 
-        public CalculateResponse Calculate(CalculateRequest request)
+        public override CalculateResponse Calculate(CalculateRequest request)
         {
-            throw new NotImplementedException();
+            Guard.NotNull(() => request, request);
+
+            int startHour = request.StartDateTime.Hour,
+                endHour = request.EndDateTime.Hour;
+
+            int inclMinStartHour = 18,
+                exclMaxStartHour = 24,
+                exclMaxEndHour = 6;
+            int maxEligibleHours = (24 - inclMinStartHour + exclMaxEndHour);
+            var dayOfWeek = request.StartDateTime.DayOfWeek;
+            var isWeekend = dayOfWeek == System.DayOfWeek.Saturday || dayOfWeek == System.DayOfWeek.Sunday;
+
+            var isEligible =
+                !isWeekend &&
+                (request.EndDateTime - request.StartDateTime).TotalHours <= maxEligibleHours &&
+                (inclMinStartHour <= startHour && startHour < exclMaxStartHour)
+                && (endHour < exclMaxEndHour);
+            if (isEligible)
+            {
+                return new CalculateResponse(Name, 6.5M);
+            }
+            return base.Calculate(request);
         }
     }
 }

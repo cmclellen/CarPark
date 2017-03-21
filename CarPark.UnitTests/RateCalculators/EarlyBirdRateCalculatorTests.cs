@@ -39,23 +39,47 @@ namespace CarPark.UnitTests.RateCalculators
                 };
 
             // ACT
-            var actual = requests.Select(request => SUT.Calculate(request)).ToList();
+            var responses = requests.Select(request => SUT.Calculate(request)).ToList();
 
             // ASSERT
-            Assert.IsTrue(actual.All(i => i.Price == 13M));
+            Assert.IsTrue(responses.All(i => i.Price == 13M));
+            Assert.IsTrue(responses.All(i => string.Equals(i.RateName, "Early Bird")));
         }
 
         [Test]
-        public void Calculate_EligibleStartTimeAndIneligibleEndTime_()
+        public void Calculate_EligibleStartTimeButIneligibleEndTime_NotEligible()
         {
             // ARRANGE
-            var request = new CalculateRequest(IncMinStartDateTime, ExclMaxEndDateTime);
+            var requests =
+                new[]
+                {
+                    new CalculateRequest(IncMinStartDateTime, IncMinEndDateTime.AddMilliseconds(-1)),
+                    new CalculateRequest(ExclMaxStartDateTime.AddMilliseconds(-1), ExclMaxEndDateTime),
+                };
 
             // ACT
-            var actual = SUT.Calculate(request);
+            var responses = requests.Select(i=>SUT.Calculate(i)).ToList();
 
             // ASSERT
-            Assert.IsNull(actual);
+            Assert.IsTrue(responses.All(i => i == null));
+        }
+
+        [Test]
+        public void Calculate_IneligibleStartTimeButEligibleEndTime_NotEligible()
+        {
+            // ARRANGE
+            var requests =
+                new[]
+                {
+                    new CalculateRequest(IncMinStartDateTime.AddMilliseconds(-1), IncMinEndDateTime),
+                    new CalculateRequest(ExclMaxStartDateTime, ExclMaxEndDateTime.AddMilliseconds(-1)),
+                };
+
+            // ACT
+            var responses = requests.Select(i => SUT.Calculate(i)).ToList();
+
+            // ASSERT
+            Assert.IsTrue(responses.All(i => i == null));
         }
     }
 }
