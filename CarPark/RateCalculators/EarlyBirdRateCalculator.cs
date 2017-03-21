@@ -9,7 +9,7 @@ namespace CarPark.RateCalculators
             get { return "Early Bird"; }
         }
 
-        public decimal CalculatePrice()
+        public CalculatePriceResponse CalculatePrice(CalculatePriceRequest request)
         {
             throw new NotImplementedException();
         }

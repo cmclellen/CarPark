@@ -3,6 +3,6 @@
     public interface IRateCalculator
     {
         string Name { get; }
-        decimal CalculatePrice();
+        CalculatePriceResponse CalculatePrice(CalculatePriceRequest request);
     }
 }

@@ -45,12 +45,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RateCalculators\CalculatePriceRequest.cs" />
+    <Compile Include="RateCalculators\CalculatePriceResponse.cs" />
     <Compile Include="RateCalculators\EarlyBirdRateCalculator.cs" />
     <Compile Include="RateCalculators\IRateCalculator.cs" />
-    <Compile Include="RateCalculators\RateCalculatorFactory.cs" />
     <Compile Include="RateCalculators\StandardRateCalculator.cs" />
     <Compile Include="RateCalculators\NightRateCalculator.cs" />
     <Compile Include="RateCalculators\WeekendRateCalculator.cs" />
+    <Compile Include="Utilities\Guard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

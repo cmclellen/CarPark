@@ -1,43 +1,38 @@
-﻿using System;
+﻿using CarPark.Utilities;
+using System;
 
 namespace CarPark.RateCalculators
 {
     public class StandardRateCalculator : IRateCalculator
-    {
-        public StandardRateCalculator(DateTime startDateTime, DateTime endDateTime)
-        {
-            if(DateTime.Compare(startDateTime, endDateTime) > 0)
-            {
-                throw new ArgumentException("Start time must be greater or equal to end time.", "endDateTime");
-            }
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-        }
-
-        private DateTime StartDateTime { get; set; }
-        private DateTime EndDateTime { get; set; }
-
+    {   
         public string Name
         {
             get { return "Standard Rate"; }
         }
 
-        public decimal CalculatePrice()
+        public CalculatePriceResponse CalculatePrice(CalculatePriceRequest request)
         {
-            var totalHours = (EndDateTime - StartDateTime).TotalHours;
-            if(totalHours < 1)
+            Guard.NotNull(() => request, request);
+
+            decimal price;
+            var totalHours = (request.EndDateTime - request.StartDateTime).TotalHours;
+            if (totalHours < 1)
             {
-                return 5M;
+                price = 5M;
             }
             else if (totalHours < 2)
             {
-                return 10M;
+                price = 10M;
             }
             else if (totalHours < 3)
             {
-                return 15M;
+                price = 15M;
             }
-            return 20M * ((EndDateTime.Date - StartDateTime.Date).Days + 1);
+            else
+            {
+                price = 20M * ((request.EndDateTime.Date - request.StartDateTime.Date).Days + 1);
+            }
+            return new CalculatePriceResponse(Name, price);
         } 
     }
 }
