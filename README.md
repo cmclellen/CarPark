@@ -1,4 +1,5 @@
-# CarPark
+# CarPark 
+###### By Craig McLellen
 
 ## Assumptions
 1. A calendar day is from Midnight to the following midnight (24 hours).
@@ -7,3 +8,5 @@
     2. for the Early Bird rate, if the patron enters at 6AM, they're eligible for this rate provided the leave at the correct times, but if they enter at 9AM, they're not.
 3. The application is run on a machine where the regional settings are configured to Australia.
 4. All prices are $AUD.
+5. Please see the UICoordinatorTests class (int the CarPark.UnitTests project) for examples of input date & times.
+
