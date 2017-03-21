@@ -13,7 +13,7 @@ namespace CarPark.UnitTests.RateCalculators
         public void ctor_EndDateTimeEarlierThanStartDateTime_ThrowsException()
         {
             // ACT
-            ArgumentException ex = Assert.Throws<ArgumentException>(() => new CalculatePriceRequest(StartDate, StartDate.AddSeconds(-1)));
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => new CalculateRequest(StartDate, StartDate.AddSeconds(-1)));
 
             // ASSERT
             Assert.That(ex.Message, Is.EqualTo("Start time must be greater or equal to end time.\r\nParameter name: endDateTime"));

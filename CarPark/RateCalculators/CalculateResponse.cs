@@ -2,9 +2,9 @@
 
 namespace CarPark.RateCalculators
 {
-    public class CalculatePriceResponse
+    public class CalculateResponse
     {
-        public CalculatePriceResponse(string rateName, decimal price)
+        public CalculateResponse(string rateName, decimal price)
         {
             Guard.NotNullOrEmpty(rateName);
             this.RateName = rateName;

@@ -9,7 +9,7 @@ namespace CarPark.RateCalculators
             get { return "Weekend Rate"; }
         }
 
-        public CalculatePriceResponse CalculatePrice(CalculatePriceRequest request)
+        public CalculateResponse Calculate(CalculateRequest request)
         {
             throw new NotImplementedException();
         }

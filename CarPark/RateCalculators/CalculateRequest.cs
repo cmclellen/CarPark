@@ -2,9 +2,9 @@
 
 namespace CarPark.RateCalculators
 {
-    public class CalculatePriceRequest
+    public class CalculateRequest
     {
-        public CalculatePriceRequest(DateTime startDateTime, DateTime endDateTime)
+        public CalculateRequest(DateTime startDateTime, DateTime endDateTime)
         {
             if (DateTime.Compare(startDateTime, endDateTime) > 0)
             {

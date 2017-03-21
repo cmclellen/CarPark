@@ -21,20 +21,20 @@ namespace CarPark.UnitTests.RateCalculators
         public void Name_ValidStandardRateCalculator_NamedCorrectly()
         {
             // ACT
-            SUT.CalculatePrice(new CalculatePriceRequest(StartDate, StartDate));
+            SUT.Calculate(new CalculateRequest(StartDate, StartDate));
 
             // ASSERT
             Assert.AreEqual("Standard Rate", SUT.Name);
         }
 
         [Test]
-        public void CalculatePrice_FirstHour_CorrectRate()
+        public void Calculate_FirstHour_CorrectRate()
         {
             // ARRANGE
             var endDates = new[] { 0.0, .5, .9 }.Select(i => StartDate.AddHours(i));
 
             // ACT
-            var actual = endDates.Select(i => SUT.CalculatePrice(new CalculatePriceRequest(StartDate, i))).ToList();
+            var actual = endDates.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 5M;
@@ -42,13 +42,13 @@ namespace CarPark.UnitTests.RateCalculators
         }
         
         [Test]
-        public void CalculatePrice_SecondHour_CorrectRate()
+        public void Calculate_SecondHour_CorrectRate()
         {
             // ARRANGE
             var endDateTimes = new[] { 1.0, 1.5, 1.9 }.Select(i=> StartDate.AddHours(i));
 
             // ACT
-            var actual = endDateTimes.Select(i => SUT.CalculatePrice(new CalculatePriceRequest(StartDate, i))).ToList();
+            var actual = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 10M;
@@ -56,13 +56,13 @@ namespace CarPark.UnitTests.RateCalculators
         }
 
         [Test]
-        public void CalculatePrice_ThirdHour_CorrectRate()
+        public void Calculate_ThirdHour_CorrectRate()
         {
             // ARRANGE
             var endDateTimes = new[] { 2.0, 2.5, 2.9 }.Select(i => StartDate.AddHours(i));
 
             // ACT
-            var actual = endDateTimes.Select(i => SUT.CalculatePrice(new CalculatePriceRequest(StartDate, i))).ToList();
+            var actual = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = 15M;
@@ -70,13 +70,13 @@ namespace CarPark.UnitTests.RateCalculators
         }
 
         [Test]
-        public void CalculatePrice_ThreePlusHours_CorrectRate()
+        public void Calculate_ThreePlusHours_CorrectRate()
         {
             // ARRANGE
             var endDateTimes = new[] { 3, 9, 18, 27, 36 }.Select(i => StartDate.AddHours(i));
 
             // ACT
-            var responses = endDateTimes.Select(i => SUT.CalculatePrice(new CalculatePriceRequest(StartDate, i))).ToList();
+            var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
             var expected = new[] { 20, 40, 40, 40, 60 }.ToList();

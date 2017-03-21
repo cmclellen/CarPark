@@ -3,6 +3,6 @@
     public interface IRateCalculator
     {
         string Name { get; }
-        CalculatePriceResponse CalculatePrice(CalculatePriceRequest request);
+        CalculateResponse Calculate(CalculateRequest request);
     }
 }

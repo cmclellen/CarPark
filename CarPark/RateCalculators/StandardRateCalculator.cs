@@ -10,7 +10,7 @@ namespace CarPark.RateCalculators
             get { return "Standard Rate"; }
         }
 
-        public CalculatePriceResponse CalculatePrice(CalculatePriceRequest request)
+        public CalculateResponse Calculate(CalculateRequest request)
         {
             Guard.NotNull(() => request, request);
 
@@ -32,7 +32,7 @@ namespace CarPark.RateCalculators
             {
                 price = 20M * ((request.EndDateTime.Date - request.StartDateTime.Date).Days + 1);
             }
-            return new CalculatePriceResponse(Name, price);
+            return new CalculateResponse(Name, price);
         } 
     }
 }
