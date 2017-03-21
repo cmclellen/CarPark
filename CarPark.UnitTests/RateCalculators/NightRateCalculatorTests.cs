@@ -1,6 +1,8 @@
 ﻿using CarPark.RateCalculators;
+using CarPark.UnitTests.Helpers;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CarPark.UnitTests.RateCalculators
@@ -17,16 +19,16 @@ namespace CarPark.UnitTests.RateCalculators
         private DateTime EnclMinStartDateTime = new DateTime(2017, 3, 21, 18, 0, 0);
         private DateTime ExclMaxStartDateTime = new DateTime(2017, 3, 22, 0, 0, 0);
         private DateTime ExclMaxEndDateTime = new DateTime(2017, 3, 22, 6, 0, 0);
-
+        private string ExpectedRateName { get; } = "Night Rate";
         private NightRateCalculator SUT { get; set; }
 
         [Test]
         public void Name_ValidNightRateCalculator_CorrectRateName()
         {
             // ASSERT
-            Assert.AreEqual("Night Rate", SUT.RateName);
+            Assert.AreEqual(ExpectedRateName, SUT.RateName);
         }
-
+        
         [Test]
         public void Name_EligibleTimesOnWeekdays_CorrectPrice()
         {
@@ -42,8 +44,7 @@ namespace CarPark.UnitTests.RateCalculators
             var responses = requests.Select(i => SUT.Calculate(i)).ToList();
 
             // ASSERT
-            Assert.IsTrue(responses.All(i => i.Price == 6.5M));
-            Assert.IsTrue(responses.All(i => string.Equals(i.RateName, "Night Rate")));
+            AssertHelpers.AssertCalculateResponses(responses, Enumerable.Repeat(6.5M, 2).ToList(), ExpectedRateName);
         }
 
         [Test]

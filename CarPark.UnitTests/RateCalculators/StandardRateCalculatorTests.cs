@@ -1,4 +1,5 @@
 ﻿using CarPark.RateCalculators;
+using CarPark.UnitTests.Helpers;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace CarPark.UnitTests.RateCalculators
 
         private DateTime StartDate { get; } = new DateTime(2017, 2, 1, 15, 0, 0);
         private StandardRateCalculator SUT { get; set; }
+        private string ExpectedRateName { get; } = "Standard Rate";
 
         [Test]
         public void Name_ValidStandardRateCalculator_CorrectRateName()
@@ -24,9 +26,9 @@ namespace CarPark.UnitTests.RateCalculators
             SUT.Calculate(new CalculateRequest(StartDate, StartDate));
 
             // ASSERT
-            Assert.AreEqual("Standard Rate", SUT.RateName);
+            Assert.AreEqual(ExpectedRateName, SUT.RateName);
         }
-        
+
         [Test]
         public void Calculate_FirstHour_CorrectRate()
         {
@@ -37,23 +39,20 @@ namespace CarPark.UnitTests.RateCalculators
             var responses = endDates.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
-            var expected = 5M;
-            Assert.IsTrue(responses.All(i => i.Price == expected));
-            Assert.IsTrue(responses.All(i => string.Equals(i.RateName, "Standard Rate")));
+            AssertHelpers.AssertCalculateResponses(responses, Enumerable.Repeat(5M, 3).ToList(), ExpectedRateName);
         }
-        
+
         [Test]
         public void Calculate_SecondHour_CorrectRate()
         {
             // ARRANGE
-            var endDateTimes = new[] { 1.0, 1.5, 1.9 }.Select(i=> StartDate.AddHours(i));
+            var endDateTimes = new[] { 1.0, 1.5, 1.9 }.Select(i => StartDate.AddHours(i));
 
             // ACT
             var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
-            var expected = 10M;
-            Assert.IsTrue(responses.All(i => i.Price == expected));
+            AssertHelpers.AssertCalculateResponses(responses, Enumerable.Repeat(10M, 3).ToList(), ExpectedRateName);
         }
 
         [Test]
@@ -66,8 +65,7 @@ namespace CarPark.UnitTests.RateCalculators
             var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
-            var expected = 15M;
-            Assert.IsTrue(responses.All(i => i.Price == expected));
+            AssertHelpers.AssertCalculateResponses(responses, Enumerable.Repeat(15M, 3).ToList(), ExpectedRateName);
         }
 
         [Test]
@@ -80,9 +78,8 @@ namespace CarPark.UnitTests.RateCalculators
             var responses = endDateTimes.Select(i => SUT.Calculate(new CalculateRequest(StartDate, i))).ToList();
 
             // ASSERT
-            var expected = new[] { 20, 40, 40, 40, 60 }.ToList();
-            var actual = responses.Select(i => i.Price).ToList();
-            CollectionAssert.AreEqual(expected, actual);
+            var expectedPrices = new[] { 20M, 40M, 40M, 40M, 60M }.ToList();
+            AssertHelpers.AssertCalculateResponses(responses, expectedPrices, ExpectedRateName);
         }
     }
 }
