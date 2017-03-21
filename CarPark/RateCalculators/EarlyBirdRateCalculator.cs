@@ -2,14 +2,19 @@
 
 namespace CarPark.RateCalculators
 {
-    public class EarlyBirdRateCalculator : IRateCalculator
+    public class EarlyBirdRateCalculator : BaseRateCalculator, IRateCalculator
     {
-        public string Name
+        public EarlyBirdRateCalculator(IRateCalculator successor)
+            : base(successor)
+        {
+        }
+
+        public override string Name
         {
             get { return "Early Bird"; }
         }
 
-        public CalculateResponse Calculate(CalculateRequest request)
+        public override CalculateResponse Calculate(CalculateRequest request)
         {
             Guard.NotNull(() => request, request);
 
@@ -22,7 +27,7 @@ namespace CarPark.RateCalculators
             {
                 return new CalculateResponse(Name, 13M);
             }
-            return null;
+            return base.Calculate(request);
         }
     }
 }

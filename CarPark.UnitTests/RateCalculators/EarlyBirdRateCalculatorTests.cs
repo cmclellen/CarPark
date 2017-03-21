@@ -11,7 +11,7 @@ namespace CarPark.UnitTests.RateCalculators
         [SetUp]
         protected void Setup()
         {
-            SUT = new EarlyBirdRateCalculator();
+            SUT = new EarlyBirdRateCalculator(null);
         }
 
         private DateTime IncMinStartDateTime { get; } = new DateTime(2017, 3, 21, 6, 0, 0);
